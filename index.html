@@ -17,6 +17,8 @@
             align-items: center;
             height: 100vh;
             text-align: center;
+            overflow: hidden;
+            cursor: url('https://png.pngtree.com/png-clipart/20220627/original/pngtree-mouse-cursor-symbol-arrow-click-pointer-illustration-isolated-png-image_8205009.png'), auto; /* Thay thế với URL hình chuột của bạn */
         }
 
         h1 {
@@ -54,6 +56,20 @@
             min-width: 100px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             animation: bounce 1s ease-in-out;
+            cursor: pointer; /* Khi hover vào các ô này, con trỏ sẽ là kiểu pointer */
+        }
+
+        /* Khi chuột di chuyển vào ô */
+        .countdown div:hover {
+            background-color: rgb(108, 200, 250); /* Thay đổi màu nền khi hover */
+            transform: scale(1.1); /* Tăng kích thước khi hover */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Khi người dùng click vào ô */
+        .countdown div:active {
+            background-color: yellow; /* Thay đổi màu nền khi nhấp vào */
+            transform: scale(0.9); /* Thu nhỏ khi nhấn */
         }
 
         .countdown .unit {
@@ -77,6 +93,59 @@
                 transform: scale(1);
             }
         }
+
+        /* Hiệu ứng động vật chạy xung quanh */
+        .animal {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-image: url('https://tse1.mm.bing.net/th?id=OIP.GFWhcwr86NkiwV45Y-CjxQHaHa&pid=Api&P=0&h=180g'); /* Thay bằng URL hình ảnh động vật bạn thích */
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: moveAnimal 10s infinite linear;
+        }
+
+        @keyframes moveAnimal {
+            0% {
+                top: 10%;
+                left: 10%;
+            }
+            25% {
+                top: 10%;
+                left: 80%;
+            }
+            50% {
+                top: 80%;
+                left: 80%;
+            }
+            75% {
+                top: 80%;
+                left: 10%;
+            }
+            100% {
+                top: 10%;
+                left: 10%;
+            }
+        }
+
+        /* Facebook logo */
+        .facebook-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg'); /* Logo Facebook */
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+        }
+
+        .facebook-link:hover {
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
@@ -89,37 +158,45 @@
         <div><span id="minutes"></span><div class="unit">PHÚT</div></div>
         <div><span id="seconds"></span><div class="unit">GIÂY</div></div>
     </div>
-    <div class="footer">Trang web đếm ngược ngày thi tốt nghiệp THPT 2025</div>
+    <div class="footer" style="font-size: 30px;">Trang web đếm ngược ngày thi tốt nghiệp THPT 2025</div>
+    
+    <!-- Động vật chạy quanh -->
+    <div class="animal"></div>
 
-    <script>
-        var graduationDate = new Date("2025-06-27T00:00:00").getTime();
+    <!-- Liên kết Facebook -->
+    <a href="https://www.facebook.com/khaivo1108" target="_blank">
+        <div class="facebook-link"></div>
+    </a>
 
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = graduationDate - now;
+    <script> 
+        var graduationDate = new Date("2025-06-27T00:00:00").getTime(); 
 
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var x = setInterval(function() { 
+            var now = new Date().getTime(); 
+            var distance = graduationDate - now; 
 
-            document.getElementById("days").innerHTML = days;
-            document.getElementById("hours").innerHTML = hours;
-            document.getElementById("minutes").innerHTML = minutes;
-            document.getElementById("seconds").innerHTML = seconds;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24)); 
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000); 
 
-            var countdownDivs = document.querySelectorAll('.countdown div');
-            countdownDivs.forEach(div => {
-                div.style.animation = 'none';
-                div.offsetHeight; // Trigger reflow
-                div.style.animation = 'bounce 1s ease-in-out';
-            });
+            document.getElementById("days").innerHTML = days; 
+            document.getElementById("hours").innerHTML = hours; 
+            document.getElementById("minutes").innerHTML = minutes; 
+            document.getElementById("seconds").innerHTML = seconds; 
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "Chúc mừng, đã đến ngày thi tốt nghiệp!";
-            }
-        }, 1000);
-    </script>
-</body>
+            var countdownDivs = document.querySelectorAll('.countdown div'); 
+            countdownDivs.forEach(div => { 
+                div.style.animation = 'none'; 
+                div.offsetHeight; // Trigger reflow 
+                div.style.animation = 'bounce 1s ease-in-out'; 
+            }); 
+
+            if (distance < 0) { 
+                clearInterval(x); 
+                document.getElementById("countdown").innerHTML = "Chúc mừng, đã đến ngày thi tốt nghiệp!"; 
+            } 
+        }, 1000); 
+    </script> 
+</body> 
 </html>
