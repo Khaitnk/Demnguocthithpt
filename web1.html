@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm ngược ngày thi tốt nghiệp THPT 2025</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #D9D9D9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .quote {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .date {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 20px;
+            font-size: 48px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 50px;
+        }
+
+        .countdown div {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 100px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: bounce 1s ease-in-out;
+        }
+
+        .countdown .unit {
+            font-size: 24px;
+            color: #bbb;
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #888;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Đếm ngược ngày thi tốt nghiệp THPT 2025</h1>
+    <div class="quote">"Tri thức là sức mạnh. F. Bacon"</div>
+    <div class="date">Ngày thi: 27/06/2025 (Dự đoán)</div>
+    <div class="countdown" id="countdown">
+        <div><span id="days"></span><div class="unit">NGÀY</div></div>
+        <div><span id="hours"></span><div class="unit">GIỜ</div></div>
+        <div><span id="minutes"></span><div class="unit">PHÚT</div></div>
+        <div><span id="seconds"></span><div class="unit">GIÂY</div></div>
+    </div>
+    <div class="footer">Trang web đếm ngược ngày thi tốt nghiệp THPT 2025</div>
+
+    <script>
+        var graduationDate = new Date("2025-06-27T00:00:00").getTime();
+
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = graduationDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            var countdownDivs = document.querySelectorAll('.countdown div');
+            countdownDivs.forEach(div => {
+                div.style.animation = 'none';
+                div.offsetHeight; // Trigger reflow
+                div.style.animation = 'bounce 1s ease-in-out';
+            });
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "Chúc mừng, đã đến ngày thi tốt nghiệp!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
